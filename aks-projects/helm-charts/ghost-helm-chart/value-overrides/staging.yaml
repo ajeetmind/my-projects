@@ -1,0 +1,65 @@
+
+secrets:
+  databasePassword: "MvtKqxPmYKlXzWbOwrAbtYVsuAGFoEzpyzFVCAu96Rc="
+  storage-connectionString: ""
+
+secrets-az:
+  azureStorageConnectionString: "your-azure-connection-string"
+  databasePassword: "your-database-password"
+  dockerConfigJson: "{}"
+
+imageRegistryDockerConf: |
+    rHcTPAETu5JjIDcQIYeh8CAJydMPWn0gSRJkshhzjpOnk9qMBnGWJPYWK8ENMGDVgBRu+cb88KtDSifxf23FosODSFt2FEvH23Jq+ui2ZBjlBPnM6TE5uTuhPM0X/FB8UX
+    LedeA7iX7cJV3AAhEy0s8POyMGGYY7LYpQK0Ow+tKMTv6N5JTT0Xa9k5g4FpQom6AOD6F9YV2jSwWR3UL6K9Ij/gclygzx0T1/N341HfGDCqHxrq9rbrzGphVi6wV+/r7o
+    OtN1q2gGtIBZmENVGF1ffZJADQmun+c/GwllVtqop/c/Yvp1CPz6zdpEUqLiYOdSk5/WTJuh1FkSci21o/fIz/7/lBhcDujijsTz5OWVu15qprmkc410whN7BVh1ZPoUX
+    u7EjigyrSGM8BtqnQ==
+
+
+
+pvc:
+  storageClassName: managed-premium
+  accessMode: ReadWriteOnce
+  size: 2Gi
+
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 2368
+
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    main:
+      host: "ghost.techajeet.uk"
+      paths:
+        - path: /
+          pathType: Prefix
+
+app:
+  conf:  # add env specific app conf
+    database__client: "mysql"
+    database__connection__host:  "my-unique-mysql-server12345.mysql.database.azure.com"
+    database__connection__user: "myadmin@my-unique-mysql-server12345"
+    database__connection__database: "ghost"
+    url: http://ghost.techajeet.uk/
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+

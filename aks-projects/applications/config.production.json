@@ -1,0 +1,36 @@
+{
+  "enableDeveloperExperiments": true,
+  "url": "http://ghost.techajeet.uk/",
+  "server": {
+    "port": 2368,
+    "host": "0.0.0.0"
+  },
+  "admin": {
+    "url": "http://ghost.techajeet.uk/"
+  },
+  "database": {
+    "client": "mysql",
+    "connection": {
+      "host": "mysql.ghost.svc.cluster.local",
+      "port": 3306,
+      "user": "ghost",
+      "password": "",
+      "database": "ghost"
+    }
+  },
+  "storage": {
+    "active": "ghost-azure-storage",
+    "ghost-azure-storage": {
+      "connectionString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=mytfstateaccount;AccountKey=GwRU+okxu55vf2KOzNvMr2FTFC88TmfXUq+96OAuQP76qTNA4Xy+i9P9tq11eoNsgEk3UzH5MtR3+AStuqlB2Q==;BlobEndpoint=https://mytfstateaccount.blob.core.windows.net/;FileEndpoint=https://mytfstateaccount.file.core.windows.net/;QueueEndpoint=https://mytfstateaccount.queue.core.windows.net/;TableEndpoint=https://mytfstateaccount.table.core.windows.net/",
+      "container": "blob",
+      "cdnUrl": "ghostblob.azureedge.net",
+      "useHttps": "true"
+    }
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  }
+}

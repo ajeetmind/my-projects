@@ -1,0 +1,14 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kubernet
+  namespace: ghost
+spec:
+  secretName: kubernet-crt-secret
+  dnsNames:
+  - http://ghost.techajeet.uk/
+  - techajeet.uk
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+    group: cert-manager.io

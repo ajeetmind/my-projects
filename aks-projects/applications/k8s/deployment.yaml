@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: personal-ghost
+  namespace: ghost
+  labels:
+    app: personal-ghost
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: personal-ghost
+  template:
+    metadata:
+      labels:
+        app: personal-ghost
+    spec:
+      containers:
+      - name: personal-ghost
+        image: ajeetmind/ghost:latest  # Modified to your Docker Hub image reference
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 2368
+        readinessProbe:
+          httpGet:
+            scheme: HTTP
+            path: /
+            port: 2368
+            httpHeaders:
+            - name: X-Forwarded-Proto
+              value: https
+          initialDelaySeconds: 60
+          periodSeconds: 5
+        resources:
+          requests:
+            memory: "300Mi"
+            cpu: "300m"
+          limits:
+            memory: "600Mi"
+            cpu: "600m"
+        env:
+          - name: NODE_ENV
+            value: production
+          - name: AZURE_STORAGE_CONNECTION_STRING
+            valueFrom:
+              secretKeyRef:
+                name: personal-website
+                key: storage-connectionString
+          - name: database__connection__password
+            valueFrom:
+              secretKeyRef:
+                name: personal-website
+                key: db-password
+        volumeMounts:
+        - mountPath: /var/lib/ghost/content/images
+          name: images-volume
+      volumes:
+      - name: images-volume
+        persistentVolumeClaim:
+          claimName: pvc-ghost-personal
+      restartPolicy: Always
+      # Since we're using Docker Hub, the imagePullSecrets for GitHub registry is not required
+      # You can add it back if you're using private Docker Hub images
+      # imagePullSecrets:
+      #   - name: github-registry-credentials

@@ -1,0 +1,24 @@
+terraform/.terraform/providers/registry.terraform.io/hashicorp/azurerm/2.99.0/darwin_arm64/terraform-provider-azurerm_v2.99.0_x5
+# Ignore directory
+local/
+
+# Ignore files
+config.yaml
+
+# Ignore all files with a certain extension
+*.lock.hcl
+*.log
+*.tmp
+
+# Ignore files in a specific directory
+another_directory/sensitive_file.txt
+
+# Ignore directories or files named cache (anywhere in the repository)
+cache/
+
+# Ignore operating system generated files
+.DS_Store  # Mac
+Thumbs.db  # Windows
+
+# Ignore IDE/editor specific files (like from Visual Studio Code)
+.vscode/

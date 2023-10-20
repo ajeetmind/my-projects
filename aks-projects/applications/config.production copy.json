@@ -1,0 +1,43 @@
+{
+  "enableDeveloperExperiments": true,
+  "url": "http://ghost.techajeet.uk/",
+  "server": {
+    "port": 2368,
+    "host": "0.0.0.0"
+  },
+  "admin": {
+    "url": "http://ghost.techajeet.uk/"
+  },
+  "database": {
+    "client": "mysql",
+    "connection": {
+      "host": "mysql.ghost.svc.cluster.local",
+      "port": 3306,
+      "user": "ghost",
+      "password": "",
+      "database": "ghost"
+    }
+  },
+  "mail": {
+    "from": "'Kubernet' <ajeetmind@gmail.com>",
+    "transport": "SMTP",
+    "options": {
+      "service": "Mailgun",
+      "host": "smtp.mailgun.org",
+      "port": 465,
+      "secureConnection": true,
+      "auth": {
+        "user": "postmaster@mg.ghost.techajeet.uk"
+      }
+    }
+  },
+  "tenor": {
+    "googleApiKey": "AIzaSyDTUBSHZWK8JNetlHuWXETYjM792RYR410"
+  },
+  "logging": {
+    "transports": [
+      "file",
+      "stdout"
+    ]
+  }
+}

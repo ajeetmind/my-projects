@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"aks_cluster","Source":"./aks_module","Dir":"aks_module"},{"Key":"azure_mysql","Source":"./azure_mysql_module","Dir":"azure_mysql_module"},{"Key":"resource_groups","Source":"./resource_groups_module","Dir":"resource_groups_module"}]}
