@@ -1,6 +1,6 @@
 
 secrets:
-  databasePassword: "MvtKqxPmYKlXzWbOwrAbtYVsuAGFoEzpyzFVCAu96Rc="
+  databasePassword: ""
   storage-connectionString: ""
 
 secrets-az:
